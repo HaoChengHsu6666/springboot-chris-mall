@@ -1,7 +1,8 @@
 package com.chrishsu.springbootchrismall.service.impl;
 
-import com.chrishsu.springbootchrismall.constant.ProductCategory;
+// import com.chrishsu.springbootchrismall.constant.ProductCategory;
 import com.chrishsu.springbootchrismall.dao.ProductDao;
+import com.chrishsu.springbootchrismall.dto.ProductQueryParams;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
 import com.chrishsu.springbootchrismall.service.ProductService;
@@ -18,8 +19,8 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productDao.getProducts(category, search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.chrishsu.springbootchrismall.controller;
 
 
 import com.chrishsu.springbootchrismall.constant.ProductCategory;
+import com.chrishsu.springbootchrismall.dto.ProductQueryParams;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
 import com.chrishsu.springbootchrismall.service.ProductService;
@@ -24,7 +25,12 @@ public class ProductController {
             @RequestParam(required = false ) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category, search);
+
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
