@@ -3,7 +3,11 @@ package com.chrishsu.springbootchrismall.dao;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
 
+import java.util.List;
+
 public interface ProductDao {
+
+    List<Product> getProducts();
 
     Product getProductById(Integer productId);
 
