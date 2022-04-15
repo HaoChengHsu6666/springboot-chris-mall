@@ -1,5 +1,6 @@
 package com.chrishsu.springbootchrismall.dao;
 
+import com.chrishsu.springbootchrismall.constant.ProductCategory;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ProductDao {
 
-    List<Product> getProducts();
+    List<Product> getProducts(ProductCategory category,String search);
 
     Product getProductById(Integer productId);
 
