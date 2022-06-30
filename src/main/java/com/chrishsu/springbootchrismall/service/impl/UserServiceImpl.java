@@ -1,6 +1,7 @@
 package com.chrishsu.springbootchrismall.service.impl;
 
 import com.chrishsu.springbootchrismall.dao.UserDao;
+import com.chrishsu.springbootchrismall.dto.UserLoginRequest;
 import com.chrishsu.springbootchrismall.dto.UserRegisterRequest;
 import com.chrishsu.springbootchrismall.model.User;
 import com.chrishsu.springbootchrismall.service.UserService;
@@ -37,9 +38,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User login(UserLoginRequest userLoginRequest){
+        User user = userDao.getUserByEmail(userLoginRequest.getEmail());
+
+        if(user == null){
+            log.warn("該 email {} 尚未註冊", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if(user.getPassword().equals(userLoginRequest.getPassword())){
+            return user;
+        }else {
+            log.warn("該 email {} 的密碼不正確", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
     public User getUserById(Integer userId){
         return userDao.getUserById(userId);
     }
+
+
 
 
 }
