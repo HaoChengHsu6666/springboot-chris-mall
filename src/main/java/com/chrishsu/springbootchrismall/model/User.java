@@ -8,13 +8,13 @@ import java.util.Date;
 public class User {
     private Integer userId;
 
-    @JsonProperty("e_mail")// 此參數在回傳至前端的(responsebody)時會有自訂義key名稱
+//    @JsonProperty("e_mail")// 加入此段，此參數在回傳至前端的(responsebody)時會有自訂義key名稱
     private String email;
 
     @JsonIgnore //此參數在回傳至前端的(responsebody)時會被忽略(隱藏)
     private String password;
 
-    private Date createDate;
+    private Date createdDate;
     private Date lastModifiedDate;
 
     public Integer getUserId() {
@@ -41,12 +41,12 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Date getLastModifiedDate() {

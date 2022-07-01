@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,7 +37,7 @@ public class UserControllerTest {
     @Test
     public void register_success() throws Exception {
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test1@gmail.com");
+        userRegisterRequest.setEmail("test8@gmail.com");
         userRegisterRequest.setPassword("123");
 
         String json = objectMapper.writeValueAsString(userRegisterRequest);
@@ -47,9 +48,10 @@ public class UserControllerTest {
                 .content(json);
 
         mockMvc.perform(requestBuilder)
+                .andDo(print())
                 .andExpect(status().is(201))
                 .andExpect(jsonPath("$.userId", notNullValue()))
-                .andExpect(jsonPath("$.email", equalTo("test1@gmail.com")))
+                .andExpect(jsonPath("$.email", equalTo("test8@gmail.com")))
                 .andExpect(jsonPath("$.createdDate", notNullValue()))
                 .andExpect(jsonPath("$.lastModifiedDate", notNullValue()));
 
@@ -102,7 +104,7 @@ public class UserControllerTest {
     public void login_success() throws Exception {
         // 先註冊新帳號
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test3@gmail.com");
+        userRegisterRequest.setEmail("test4@gmail.com");
         userRegisterRequest.setPassword("123");
 
         //call另外寫的一個register方法給各別的單元測試用
@@ -132,7 +134,7 @@ public class UserControllerTest {
     public void login_wrongPassword() throws Exception {
         // 先註冊新帳號
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        userRegisterRequest.setEmail("test4@gmail.com");
+        userRegisterRequest.setEmail("test3@gmail.com");
         userRegisterRequest.setPassword("123");
 
         //call另外寫的一個register方法給各別的單元測試用
