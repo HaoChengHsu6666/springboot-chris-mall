@@ -4,6 +4,7 @@ import com.chrishsu.springbootchrismall.dao.OrderDao;
 import com.chrishsu.springbootchrismall.dao.ProductDao;
 import com.chrishsu.springbootchrismall.dto.BuyItem;
 import com.chrishsu.springbootchrismall.dto.CreateOrderRequest;
+import com.chrishsu.springbootchrismall.model.Order;
 import com.chrishsu.springbootchrismall.model.OrderItem;
 import com.chrishsu.springbootchrismall.model.Product;
 import com.chrishsu.springbootchrismall.service.OrderService;
@@ -22,6 +23,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ProductDao productDao;
+
+    @Override
+    public Order getOrderById(Integer orderId) {
+        Order order = orderDao.getOrderById(orderId);
+
+        List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(orderId);
+
+        //至Order Model設計出orderItemList，以便將訂單物品清單插入至訂單中
+        order.setOrderItemList(orderItemList);
+
+        return order;
+    }
 
     @Transactional //加入此註解，使createOrder與createOrderItem能同時成立或同時回朔，避免數據不一致
     @Override
