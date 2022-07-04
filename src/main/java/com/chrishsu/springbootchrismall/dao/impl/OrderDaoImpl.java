@@ -23,7 +23,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Integer createOrder(Integer userId, Integer totalAmount) {
 
-        String sql = "INSERT INTO mall.`order`(user_id, total_amount, " +
+        String sql = "INSERT INTO `order`(user_id, total_amount, " +
                 " created_date, last_modified_date) VALUES (:userId, " +
                 " :totalAmount, :createdDate, :lastModifiedDate)";
 
@@ -65,7 +65,7 @@ public class OrderDaoImpl implements OrderDao {
 //        }
 
         // 使用 batchUpdate 一次性加入數據(效率較佳)
-        String sql = "INSERT INTO mall.order_item (order_id, product_id, " +
+        String sql = "INSERT INTO order_item (order_id, product_id, " +
                 " quantity, amount) VALUES (:orderId, " +
                 " :productId, :quantity, :amount)";
 
@@ -76,7 +76,7 @@ public class OrderDaoImpl implements OrderDao {
 
             parameterSources[i] = new MapSqlParameterSource();
             parameterSources[i].addValue("orderId", orderId);
-            parameterSources[i].addValue("productId", orderItem.getOrderItemId());
+            parameterSources[i].addValue("productId", orderItem.getProductId());
             parameterSources[i].addValue("quantity", orderItem.getQuantity());
             parameterSources[i].addValue("amount", orderItem.getAmount());
         }
