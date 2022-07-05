@@ -19,3 +19,12 @@ CREATE TABLE IF NOT EXISTS user
     created_date       TIMESTAMP    NOT NULL,
     last_modified_date TIMESTAMP    NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS `order`
+(
+    order_id           INT       NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id            INT       NOT NULL,
+    total_amount       INT       NOT NULL,
+    created_date       TIMESTAMP NOT NULL,
+    last_modified_date TIMESTAMP NOT NULL
+);
