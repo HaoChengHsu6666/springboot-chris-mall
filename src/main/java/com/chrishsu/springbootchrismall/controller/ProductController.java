@@ -36,7 +36,9 @@ public class ProductController {
             @RequestParam(defaultValue = "desc") String sort,
 
             //分頁 Pagination
+            //取?筆數
             @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+            //從第?筆開始取
             @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ){
 
