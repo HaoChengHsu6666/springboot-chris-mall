@@ -48,7 +48,7 @@ public class ProductController {
         productQueryParams.setLimit(limit);
         productQueryParams.setOffset(offset);
 
-        //取得 product lsit
+        //取得 product list
         List<Product> productList = productService.getProducts(productQueryParams);
 
         //取得 product 總數
@@ -95,12 +95,13 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-
-        //商品若有存在就將更新商品的數據回傳給前端
+        //商品若有存在就更新商品
         productService.updateProduct(productId, productRequest);
 
+        //再次查詢更新後的產品
         Product updateProduct = productService.getProductById(productId);
 
+        //將更新後的產品物件及成功取得數據狀態回傳給前端
         return ResponseEntity.status(HttpStatus.OK).body(updateProduct);
 
     }
@@ -109,7 +110,7 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
         productService.deleteProductById(productId);
 
-        //回傳前端數據已刪除
+        //回傳已刪除數據狀態給前端
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

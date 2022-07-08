@@ -46,7 +46,7 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
 
-        //查詢條件
+        //加工處裡查詢條件(做category與search的判斷)
         sql = addFilteringSql(sql, map, productQueryParams);
 
         //排序
@@ -79,6 +79,7 @@ public class ProductDaoImpl implements ProductDao {
             return null;
         }
     }
+
 
     @Override
     public Integer createProduct(ProductRequest productRequest) {

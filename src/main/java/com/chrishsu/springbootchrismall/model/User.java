@@ -1,14 +1,13 @@
 package com.chrishsu.springbootchrismall.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 public class User {
     private Integer userId;
 
-//    @JsonProperty("e_mail")// 加入此段，此參數在回傳至前端的(responsebody)時會有自訂義key名稱
+//  @JsonProperty("e_mail")// 加入此段，此參數在回傳至前端的(responsebody)時會有自訂義key名稱
     private String email;
 
     @JsonIgnore //此參數在回傳至前端的(responsebody)時會被忽略(隱藏)

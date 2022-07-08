@@ -1,11 +1,8 @@
 package com.chrishsu.springbootchrismall.controller;
 
-import com.chrishsu.springbootchrismall.constant.ProductCategory;
 import com.chrishsu.springbootchrismall.dto.CreateOrderRequest;
 import com.chrishsu.springbootchrismall.dto.OrderQueryParams;
-import com.chrishsu.springbootchrismall.dto.ProductQueryParams;
 import com.chrishsu.springbootchrismall.model.Order;
-import com.chrishsu.springbootchrismall.model.Product;
 import com.chrishsu.springbootchrismall.service.OrderService;
 import com.chrishsu.springbootchrismall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,7 @@ public class OrderController {
         orderQueryParams.setLimit(limit);
         orderQueryParams.setOffset(offset);
 
-        //取得 order lsit
+        //取得 order list
         List<Order> orderList = orderService.getOrders(orderQueryParams);
 
         //取得 order 總數
