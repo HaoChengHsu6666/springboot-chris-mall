@@ -5,14 +5,20 @@ import com.chrishsu.springbootchrismall.dao.ProductDao;
 import com.chrishsu.springbootchrismall.dto.ProductQueryParams;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
+import com.chrishsu.springbootchrismall.model.ProductDto;
 import com.chrishsu.springbootchrismall.service.ProductService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ProductServiceImpl implements ProductService {
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private ProductDao productDao ;
@@ -46,6 +52,26 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProductById(Integer productId) {
         productDao.deleteProductById(productId);
+    }
+
+    @Override
+    public ProductDto getOneProductNameAndPriceById(Integer id) {
+        ProductDto productDto = new ProductDto();
+        Product product = productService.getProductById(id);
+        BeanUtils.copyProperties(product, productDto);
+        return productDto;
+    }
+
+    @Override
+    public List<ProductDto> getAllProductNameAndPrice(ProductQueryParams productQueryParams) {
+        List<ProductDto> dtoList = new ArrayList<>();
+        List<Product> productList = productService.getProducts(productQueryParams);
+        for (Product product : productList) {
+            ProductDto productDto = new ProductDto();
+            BeanUtils.copyProperties(product, productDto);
+            dtoList.add(productDto);
+        }
+        return dtoList;
     }
 
 

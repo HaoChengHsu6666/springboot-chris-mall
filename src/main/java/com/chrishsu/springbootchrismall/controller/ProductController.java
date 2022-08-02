@@ -5,6 +5,7 @@ import com.chrishsu.springbootchrismall.constant.ProductCategory;
 import com.chrishsu.springbootchrismall.dto.ProductQueryParams;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
+import com.chrishsu.springbootchrismall.model.ProductDto;
 import com.chrishsu.springbootchrismall.service.ProductService;
 import com.chrishsu.springbootchrismall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,51 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
+    @GetMapping("/products/nameAndPrice")
+    public ResponseEntity<Page<ProductDto>> getAllProductNameAndPrice(
+            // 查詢條件 Filtering  //沒傳值就是null
+    @RequestParam(required = false ) ProductCategory category,
+    @RequestParam(required = false) String search,
+
+    //排序 Sorting
+    @RequestParam(defaultValue = "created_date") String orderBy,
+    @RequestParam(defaultValue = "desc") String sort,
+
+    //分頁 Pagination
+    //取?筆數
+    @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+    //從第?筆開始取
+    @RequestParam(defaultValue = "0") @Min(0) Integer offset
+    ) {
+
+
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+        productQueryParams.setOrderBy(orderBy);
+        productQueryParams.setSort(sort);
+        productQueryParams.setLimit(limit);
+        productQueryParams.setOffset(offset);
+
+        //取得 product list
+        List<ProductDto> productList = productService.getAllProductNameAndPrice(productQueryParams);
+
+        //取得 product 總數
+        Integer total = productService.countProduct(productQueryParams);
+
+        //分頁
+        Page<ProductDto> page = new Page<>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResults(productList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+
+    }
+
+
+
 
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId){
@@ -115,6 +161,13 @@ public class ProductController {
         //回傳已刪除數據狀態給前端
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+
+    @GetMapping("/products/nameAndPrice/{id}")
+    public ProductDto getOneProductNameAndPriceById(@PathVariable Integer id){
+        return productService.getOneProductNameAndPriceById(id);
+    }
+
 
 
 

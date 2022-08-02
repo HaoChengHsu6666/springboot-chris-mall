@@ -4,6 +4,7 @@ package com.chrishsu.springbootchrismall.service;
 import com.chrishsu.springbootchrismall.dto.ProductQueryParams;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
 import com.chrishsu.springbootchrismall.model.Product;
+import com.chrishsu.springbootchrismall.model.ProductDto;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface ProductService {
     void updateProduct(Integer productId, ProductRequest productRequest);
 
     void deleteProductById(Integer productId);
+
+    ProductDto getOneProductNameAndPriceById(Integer id);
+
+    List<ProductDto> getAllProductNameAndPrice(ProductQueryParams productQueryParams);
 }

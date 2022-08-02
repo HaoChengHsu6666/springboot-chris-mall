@@ -1,8 +1,8 @@
 package com.chrishsu.springbootchrismall.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.chrishsu.springbootchrismall.constant.ProductCategory;
 import com.chrishsu.springbootchrismall.dto.ProductRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -223,7 +222,7 @@ public class ProductControllerTest {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/products")
                 .param("orderBy", "price")
-                .param("sort", "desc");
+                        .param("sort", "desc");
 
         mockMvc.perform(requestBuilder)
                 .andDo(print())
@@ -243,8 +242,10 @@ public class ProductControllerTest {
     public void getProducts_pagination() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/products")
+                 //取?筆數
                 .param("limit", "2")
-                .param("offset", "2");
+                 //從第?筆開始取
+                .param("offset", "3");
 
         mockMvc.perform(requestBuilder)
                 .andDo(print())
@@ -253,7 +254,7 @@ public class ProductControllerTest {
                 .andExpect(jsonPath("$.offset", notNullValue()))
                 .andExpect(jsonPath("$.total", notNullValue()))
                 .andExpect(jsonPath("$.results", hasSize(2)))
-                .andExpect(jsonPath("$.results[0].productId", equalTo(5)))
-                .andExpect(jsonPath("$.results[1].productId", equalTo(4)));
+                .andExpect(jsonPath("$.results[0].productId", equalTo(4)))
+                .andExpect(jsonPath("$.results[1].productId", equalTo(3)));
     }
 }

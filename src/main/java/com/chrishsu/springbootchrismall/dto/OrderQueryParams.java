@@ -1,6 +1,6 @@
 package com.chrishsu.springbootchrismall.dto;
 
-public class OrderQueryParams {
+public class  OrderQueryParams {
 
     private Integer userId;
     private Integer limit;
