@@ -22,43 +22,21 @@ public class PublicPrefixWord {
     public static String findPublicPrefix(String[] strs){
 
         if (strs == null || strs.length == 0) {
-            return ""; // 字符串数组为空，返回空字符串
+            return "";
         }
 
         String publicPrefix = "";
-
         int sl = strs.length;
-
-        // GPT寫法
-        String prefix = strs[0]; // 初始化前缀为第一个字符串
+        String prefix = strs[0];
         for (int i = 1; i < sl; i++) {
             while (strs[i].indexOf(prefix) != 0) {
-                // 不断缩小前缀直到匹配为止
                 prefix = prefix.substring(0, prefix.length() - 1);
                 if (prefix.isEmpty()) {
-                    // 如果前缀为空，说明不存在公共前缀，直接返回空字符串
                     return "";
                 }
             }
         }
-
-        // 我的寫法，仍有誤。
-//        for (int i = 0; i < sl-1; i++){
-//            if(!publicPrefix.isEmpty() &&
-//                    strs[i].toLowerCase().substring(0,publicPrefix.length())
-//                    .equals(publicPrefix)){
-//                break;
-//            }
-//            int k = 0;
-//            for(int j = i+1; j < sl; j++){
-//                if(strs[i].charAt(k) == strs[j].charAt(k)){
-//                    publicPrefix = publicPrefix + strs[i].charAt(k);
-//                }
-//                k++;
-//            }
-//        }
-//        return publicPrefix;
-          return prefix;
+        return prefix;
     }
 
     public static void main(String[] args) {
@@ -68,3 +46,5 @@ public class PublicPrefixWord {
     }
 
 }
+
+

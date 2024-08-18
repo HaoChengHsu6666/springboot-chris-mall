@@ -30,7 +30,7 @@ public class SumInArray {
 
     public static void main(String[] args) {
         int[] nums = {1,3,5,7};
-        int[] targetNums = sumInArray(nums,16);
+        int[] targetNums = sumInArray(nums,12);
         for(int targetNum : targetNums){
             // -1,-1 表示無找到對應的兩個值
             System.out.print(targetNum + ",");

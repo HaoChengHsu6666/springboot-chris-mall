@@ -1,4 +1,4 @@
-package com.chrishsu.springbootchrismall.graphics;
+package com.chrishsu.springbootchrismall.practice.graphics;
 
 import java.util.Arrays;
 import java.util.List;

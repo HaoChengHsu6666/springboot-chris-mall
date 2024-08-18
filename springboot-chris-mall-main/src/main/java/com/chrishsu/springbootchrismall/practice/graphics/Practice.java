@@ -1,11 +1,4 @@
-package com.chrishsu.springbootchrismall.graphics;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+package com.chrishsu.springbootchrismall.practice.graphics;
 
 public class Practice {
     public static boolean xyzMiddle(String str) {
